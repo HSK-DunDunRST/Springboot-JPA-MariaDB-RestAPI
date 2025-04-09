@@ -1,0 +1,23 @@
+server:
+    port: 5000
+
+spring:
+    application:
+        name: HSKSite
+    datasource:
+        url: jdbc:mariadb://127.0.0.1:3307/hsk_restapi
+        username: JavaHSK
+        password: Java1234
+        driver-class-name: org.mariadb.jdbc.Driver
+    jpa:
+        database-platform: org.hibernate.dialect.MariaDBDialect
+        hibernate:
+            ddl-auto: update
+        properties:
+            '[show_sql]': true
+            '[hibernate.format_sql]': true
+
+logging:
+    level:
+        '[org.hibernate.SQL]': debug
+        '[org.hibernate.type.descriptor.sql.BasicBinder]': trace
