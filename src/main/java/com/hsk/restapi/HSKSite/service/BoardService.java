@@ -2,6 +2,7 @@ package com.hsk.restapi.HSKSite.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,7 +40,7 @@ public class BoardService {
 
     @Transactional
     public ApiResponseDTO<BoardResponseDTO> createBoard(BoardRequestDTO boardRequestDTO){
-        if(boardEntityRepository.findByTableName(boardRequestDTO.getBoardTableName()).isEmpty()){
+        if(boardEntityRepository.findByBoardTableName(boardRequestDTO.getBoardTableName()).isEmpty()){
             BoardEntity savedBoard = boardEntityRepository.save(BoardEntity.of(boardRequestDTO));
             //* Debugging 전용 출력문
             System.out.println("Saved Board ID: " + savedBoard.getId());
@@ -47,6 +48,14 @@ public class BoardService {
         } else {
             return ResponseUtils.error(ErrorResponse.of(ErrorType.DUPLICATE_BOARDNAME, "이미 존재하는 게시판입니다."));
         }
+    }
 
+    @Transactional
+    public ApiResponseDTO<Optional<BoardEntity>> getByIdBoard(Long id){
+        if(boardEntityRepository.findById(id).isPresent()){
+            return ResponseUtils.success(boardEntityRepository.findById(id));
+        } else {
+            return ResponseUtils.error(ErrorResponse.of(ErrorType.NOT_FOUND_BOARD, "게시판을 찾을 수 없습니다."));
+        }
     }
 }
