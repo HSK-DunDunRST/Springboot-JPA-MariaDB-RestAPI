@@ -18,7 +18,9 @@ public enum ErrorType {
     NOT_FOUND_USER(HttpStatus.NOT_FOUND, "해당 유저를 찾을 수 없습니다."),
     NOT_FOUND_BOARD(HttpStatus.NOT_FOUND, "해당 게시판을 찾을 수 없습니다."),
     NOT_FOUND_POST(HttpStatus.NOT_FOUND, "해당 게시글을 찾을 수 없습니다."),
-    NOT_FOUND_FILE(HttpStatus.NOT_FOUND, "해당 파일을 찾을 수 없습니다.");
+    NOT_FOUND_FILE(HttpStatus.NOT_FOUND, "해당 파일을 찾을 수 없습니다."),
+    // Error code - 500
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류입니다.");
 
     private HttpStatus errorCode;
     private String errorMessage;
