@@ -1,15 +1,11 @@
 package com.hsk.restapi.HSKSite.repository;
 
 import java.sql.SQLException;
-
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import com.hsk.restapi.HSKSite.data.dtoSet.BoardRequestDTO;
-import com.hsk.restapi.HSKSite.data.dtoSet.PostRequestDTO;
-
-import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Repository
