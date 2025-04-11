@@ -8,14 +8,14 @@ import lombok.Getter;
 
 @Getter
 public class BoardResponseDTO {
-    private Long id;
+    private Long boardId;
     private String boardName;
     private String boardTableName;
     private String boardDescription;
     private LocalDateTime boardCreateDate;
 
     private BoardResponseDTO(BoardEntity boardEntity){
-        this.id = boardEntity.getId();
+        this.boardId = boardEntity.getBoardId();
         this.boardName = boardEntity.getBoardName();
         this.boardTableName = boardEntity.getBoardTableName();
         this.boardDescription = boardEntity.getBoardDescription();

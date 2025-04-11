@@ -22,7 +22,8 @@ import lombok.NoArgsConstructor;
 public class BoardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "board_id")
+    private Long boardId;
 
     @Column(name = "board_table_name")
     private String boardTableName;
