@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hsk.restapi.HSKSite.common.ErrorResponse;
 import com.hsk.restapi.HSKSite.common.ResponseUtils;
 import com.hsk.restapi.HSKSite.data.dtoSet.ApiResponseDTO;
 import com.hsk.restapi.HSKSite.data.dtoSet.BoardRequestDTO;
 import com.hsk.restapi.HSKSite.data.dtoSet.BoardResponseDTO;
 import com.hsk.restapi.HSKSite.data.entitySet.BoardEntity;
+import com.hsk.restapi.HSKSite.data.enumSet.ErrorType;
 import com.hsk.restapi.HSKSite.repository.BoardEntityRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -36,9 +39,14 @@ public class BoardService {
 
     @Transactional
     public ApiResponseDTO<BoardResponseDTO> createBoard(BoardRequestDTO boardRequestDTO){
-        BoardEntity savedBoard = boardEntityRepository.save(BoardEntity.of(boardRequestDTO));
-        //* Debugging 전용 출력문
-        System.out.println("Saved Board ID: " + savedBoard.getId());
-        return ResponseUtils.success(BoardResponseDTO.from(savedBoard));
+        if(boardEntityRepository.findByTableName(boardRequestDTO.getBoardTableName()).isEmpty()){
+            BoardEntity savedBoard = boardEntityRepository.save(BoardEntity.of(boardRequestDTO));
+            //* Debugging 전용 출력문
+            System.out.println("Saved Board ID: " + savedBoard.getId());
+            return ResponseUtils.success(BoardResponseDTO.from(savedBoard));
+        } else {
+            return ResponseUtils.error(ErrorResponse.of(ErrorType.DUPLICATE_BOARDNAME, "이미 존재하는 게시판입니다."));
+        }
+
     }
 }
