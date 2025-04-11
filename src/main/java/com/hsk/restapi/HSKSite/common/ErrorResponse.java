@@ -1,8 +1,6 @@
 package com.hsk.restapi.HSKSite.common;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
-
 import com.hsk.restapi.HSKSite.data.enumSet.ErrorType;
 
 import lombok.Builder;
